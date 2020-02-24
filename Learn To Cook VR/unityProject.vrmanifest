@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.learntocookvr.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\dgreader\\Documents\\GitHub\\Learn-To-Cook-VR\\Learn To Cook VR\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Learn To Cook VR [Testing]"
+        }
+      }
+    }
+  ]
+}
