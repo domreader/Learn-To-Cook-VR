@@ -9,6 +9,7 @@ public class Cooking : MonoBehaviour
 
     bool isButterAdded = false;
     bool isFlourAdded = false;
+    bool isEverythingCorrect = false;
 
     [SerializeField]
     GameObject Flour;
@@ -28,33 +29,37 @@ public class Cooking : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.gameObject.tag == "Flour")
+        if (collider.gameObject.tag == "Butter")
         {
             GameObject.Find("Image").GetComponent<Image>().sprite = sprites[1];
             Debug.Log("Flour Added");
             isFlourAdded = true;
-            Destroy(Flour);
+            Destroy(Butter);
 
         }
 
-        if (collider.gameObject.tag == "Butter")
+        if (collider.gameObject.tag == "Flour")
         {
             GameObject.Find("Image").GetComponent<Image>().sprite = sprites[2];
             Debug.Log("Butter Added");
             isButterAdded = true;
-            Destroy(Butter);
+            Destroy(Flour);
 
         }
 
         if (isButterAdded == true && isFlourAdded == true)
         {
             Debug.Log("Congratulations ... You Can Drop Stuff In A Pan");
+            isEverythingCorrect = true;
 
         }
 
-        if(collider.gameObject.tag == "placeMat")
+        if(isEverythingCorrect == true && collider.gameObject.tag == "placeMat")
         {
             SceneManager.LoadScene("Menu Screen");
+        } else
+        {
+            Debug.Log("Do not try to skip");
         }
 
 
