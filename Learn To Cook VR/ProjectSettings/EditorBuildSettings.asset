@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Kitchen.unity
+    path: Assets/Scenes/Roux.unity
     guid: a6596c58719b8fd45b7fa0151d325874
   - enabled: 1
     path: Assets/Scenes/Menu Screen.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: 2e7631c18ac70be44b31ef876916a810
+  - enabled: 1
+    path: Assets/Scenes/Burgers & Dogs.unity
+    guid: c394cbfbc251ff94593d6bc0b8ae48f6
+  - enabled: 1
+    path: Assets/Scenes/Lose Room.unity
+    guid: 129528870658e1e4d9da2b3ed927bbaf
   m_configObjects: {}

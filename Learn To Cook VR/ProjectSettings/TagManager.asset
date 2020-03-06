@@ -11,6 +11,9 @@ TagManager:
   - Butter
   - placeMat
   - FxTemporaire
+  - Hob
+  - Milk
+  - Stock
   layers:
   - Default
   - TransparentFX
