@@ -34,6 +34,11 @@ namespace Valve.VR.InteractionSystem
             AllowSidegrade = 1 << 7, // The object is able to switch from a pinch grab to a grip grab. Decreases likelyhood of a good throw but also decreases likelyhood of accidental drop
         };
 
+        public bool GetStandardInteractionButtonUp()
+        {
+            throw new NotImplementedException();
+        }
+
         public const AttachmentFlags defaultAttachmentFlags = AttachmentFlags.ParentToHand |
                                                               AttachmentFlags.DetachOthers |
                                                               AttachmentFlags.DetachFromOtherHand |
@@ -1677,6 +1682,11 @@ namespace Valve.VR.InteractionSystem
         public int GetDeviceIndex()
         {
             return trackedObject.GetDeviceIndex();
+        }
+
+        public bool GetStandardInteractionButton()
+        {
+            throw new NotImplementedException();
         }
     }
 

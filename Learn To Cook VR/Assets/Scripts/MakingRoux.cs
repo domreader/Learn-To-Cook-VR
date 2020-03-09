@@ -37,6 +37,10 @@ public class MakingRoux : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
 
+        Color greenColor = new Vector4(0.0f, 0.1f, 0.0f, 0.1f);
+        Color redColor = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+
+        
 
         if (collider.gameObject.tag == "Butter")
         {
@@ -70,13 +74,14 @@ public class MakingRoux : MonoBehaviour
 
         if (collider.gameObject.tag == "Hob" && allIngredientsPresent == true)
         {
-
-           Debug.Log("Cooking time is " + (timer + 1) + "Seconds" );
+           
+           Debug.Log("Cooking time is " + (timer) + "Seconds" );
           
-            timer += Time.deltaTime;
 
-           if (timer >= 5)
+           if (timer >= 6)
             {
+                gameObject.GetComponent<Renderer>().material.color = greenColor;
+
 
                 Debug.Log("Take the pan off heat");
                 isEverythingCorrect = true;
@@ -84,8 +89,11 @@ public class MakingRoux : MonoBehaviour
                
             }
 
-            if (timer >= 10)
+            if (timer >= 18)
             {
+
+                gameObject.GetComponent<Renderer>().material.color = redColor;
+
                 Debug.Log("Try Again");
                 GameObject.Find("Image").GetComponent<Image>().sprite = sprites[4];
                 isEverythingCorrect = false;
@@ -120,5 +128,11 @@ public class MakingRoux : MonoBehaviour
             Debug.Log("Hmmm ... That is not correct");
 
         }
+    }
+
+
+    private void Update()
+    {
+        timer = timer + Time.deltaTime;
     }
 }
