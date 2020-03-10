@@ -74,8 +74,9 @@ public class MakingRoux : MonoBehaviour
 
         if (collider.gameObject.tag == "Hob" && allIngredientsPresent == true)
         {
-           
-           Debug.Log("Cooking time is " + (timer) + "Seconds" );
+            timer = timer + Time.deltaTime;
+
+            Debug.Log("Cooking time is " + (timer) + "Seconds" );
           
 
            if (timer >= 6)
@@ -97,6 +98,8 @@ public class MakingRoux : MonoBehaviour
                 Debug.Log("Try Again");
                 GameObject.Find("Image").GetComponent<Image>().sprite = sprites[4];
                 isEverythingCorrect = false;
+                SceneManager.LoadScene("Lose Room");
+
             }
 
         }
@@ -130,9 +133,4 @@ public class MakingRoux : MonoBehaviour
         }
     }
 
-
-    private void Update()
-    {
-        timer = timer + Time.deltaTime;
-    }
 }
