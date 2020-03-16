@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class Button : MonoBehaviour
@@ -12,6 +13,7 @@ public class Button : MonoBehaviour
 
     Vector3 startPos;
     Rigidbody rb;
+    public Sprite[] sprites;
 
     void Start()
     {
@@ -33,6 +35,12 @@ public class Button : MonoBehaviour
                 pressed = true;
                 // If we have an event, invoke it
                 downEvent?.Invoke();
+            }
+
+            if (pressed)
+            {
+                GameObject.Find("Image").GetComponent<Image>().sprite = sprites[0];
+
             }
         }
         else

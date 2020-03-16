@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
-using Valve.VR.Extras;
-
-
 
 /*
-  * This class is attached to a door handle. The door handle is child of a door.
-  */
-/*
-  * This class is attached to a door handle. The door handle is child of a door.
-  */
+ * This class is attached to a door handle. The door handle is child of a door.
+ */
 public class openDoor : MonoBehaviour
 {
     private Vector3 force;
@@ -52,7 +46,6 @@ public class openDoor : MonoBehaviour
             // Apply cross product and calculated angle to
             GetComponentInParent<Rigidbody>().angularVelocity = cross * angle * forceMultiplier;
         }
-
     }
 
     private void OnHandHoverEnd()

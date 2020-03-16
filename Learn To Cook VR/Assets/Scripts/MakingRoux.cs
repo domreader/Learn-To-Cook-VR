@@ -14,6 +14,10 @@ public class MakingRoux : MonoBehaviour
     bool allIngredientsPresent = false;
     bool isEverythingCorrect = false;
     float timer;
+    bool isOnHob = false;
+    bool isOvercooked = false;
+    Color greenColor = new Vector4(0.0f, 0.1f, 0.0f, 0.1f);
+    Color redColor = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
     [SerializeField]
     GameObject Flour;
@@ -36,12 +40,7 @@ public class MakingRoux : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-
-        Color greenColor = new Vector4(0.0f, 0.1f, 0.0f, 0.1f);
-        Color redColor = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-
         
-
         if (collider.gameObject.tag == "Butter")
         {
 
@@ -62,47 +61,24 @@ public class MakingRoux : MonoBehaviour
 
         }
 
-        if (isButterAdded == true && isFlourAdded == true)
+        if (isButterAdded == true && isFlourAdded == true && allIngredientsPresent == false)
         {
 
             Debug.Log("Congratulations ... You Can Drop Stuff In A Pan");
             Debug.Log("Now Put The Pan On The Heat Till Flour Is Cooked Out");
 
             allIngredientsPresent = true;
-
+            
         }
 
         if (collider.gameObject.tag == "Hob" && allIngredientsPresent == true)
         {
-            timer = timer + Time.deltaTime;
 
+            isOnHob = true;
             Debug.Log("Cooking time is " + (timer) + "Seconds" );
-          
-
-           if (timer >= 6)
-            {
-                gameObject.GetComponent<Renderer>().material.color = greenColor;
-
-
-                Debug.Log("Take the pan off heat");
-                isEverythingCorrect = true;
-                GameObject.Find("Image").GetComponent<Image>().sprite = sprites[3];
-               
-            }
-
-            if (timer >= 18)
-            {
-
-                gameObject.GetComponent<Renderer>().material.color = redColor;
-
-                Debug.Log("Try Again");
-                GameObject.Find("Image").GetComponent<Image>().sprite = sprites[4];
-                isEverythingCorrect = false;
-                SceneManager.LoadScene("Lose Room");
-
-            }
 
         }
+
 
         if (isEverythingCorrect == true && collider.gameObject.tag == "Milk")
         {
@@ -125,12 +101,63 @@ public class MakingRoux : MonoBehaviour
 
         }
 
-        if (isEverythingCorrect == false && collider.gameObject.tag == "placeMat")
+        if (isOvercooked == false && collider.gameObject.tag == "placeMat")
         {
 
             Debug.Log("Hmmm ... That is not correct");
 
         }
     }
+
+    private void OnTriggerExit(Collider collider)
+    {
+
+        if (collider.gameObject.tag == "Hob" && allIngredientsPresent == true)
+        {
+
+            isOnHob = false;
+            Debug.Log("Cooking time is done");
+            
+
+        }
+
+    }
+
+    private void Update()
+    {
+
+        if (isOnHob == true)
+        {
+
+            timer += Time.deltaTime;
+
+            print(timer);
+
+        }
+
+        if (isOvercooked == false)
+        {
+            if (timer >= 12)
+            {
+
+
+                gameObject.GetComponent<Renderer>().material.color = redColor;
+
+                Debug.Log("Try Again");
+                GameObject.Find("Image").GetComponent<Image>().sprite = sprites[4];
+                SceneManager.LoadScene("Lose Room");
+                isOvercooked = true;
+
+            }
+            else if (timer > 6)
+            {
+
+                gameObject.GetComponent<Renderer>().material.color = greenColor;
+                isEverythingCorrect = true;
+                GameObject.Find("Image").GetComponent<Image>().sprite = sprites[3];
+
+            }
+        }
+    }    
 
 }
