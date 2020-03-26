@@ -7,7 +7,6 @@ public class cube : MonoBehaviour
 {
 
     PlayerControls controls;
-    Collider collider;
 
     Vector3 move;
     Vector3 rotate;
@@ -16,15 +15,25 @@ public class cube : MonoBehaviour
 
     public static bool isGamePaused = false;
     public static bool isBookOpen = false;
+    public static bool collisionDetected = false;
+    
     public GameObject pauseMenuUI;
     public GameObject mainBookUI;
+    public GameObject mainInstructionUI;
 
     public GameObject[] pages;
-    int i = 0;
-    
+
+    int currentPage = 0;
+
+    void Start()
+    {
+        pages[0].SetActive(true);
+        currentPage = 0;
+    }
 
     void Awake()
     {
+
         controls = new PlayerControls();
 
         controls.playerControls.OpeningBook.started += ctx => selectedBook();
@@ -41,12 +50,23 @@ public class cube : MonoBehaviour
         controls.playerControls.Pause.started += ctx => gamePaused();
         controls.playerControls.Pause.canceled += ctx => gamePlaying();
 
-        controls.playerControls.TurningPageLeft.performed += ctx => turnPageLeft();
-        controls.playerControls.TurningPageRight.performed += ctx => turnPageRight();
+        controls.playerControls.TurningPageLeft.started += ctx => turnPageLeft();
+        controls.playerControls.TurningPageRight.started += ctx => turnPageRight();
 
-      
+        controls.playerControls.Interact.started += ctx => pickUp();
+
+
+        void pickUp()
+        {
+            if (collisionDetected == true)
+            {
+                Debug.Log("Add item ");
+
+                
+                
+            }
+        }
     }
-
 
     void selectedBook()
     {
@@ -61,52 +81,58 @@ public class cube : MonoBehaviour
             bookOpen();
         }
 
-
     }
 
     void turnPageLeft()
     {
-        if (isBookOpen == true)
-        {
 
-            pages[0].SetActive(true);
-            pages[1].SetActive(false);
+        if ((currentPage - 1) >= 0)
+        {
+            pages[currentPage].SetActive(false);
+            pages[currentPage - 1].SetActive(true);
+            currentPage -= 1;
         }
-        
+
     }
     void turnPageRight()
     {
 
-        if(isBookOpen == true)
+        if (isBookOpen == true)
         {
-            pages[0].SetActive(false);
-            pages[1].SetActive(true);
-          //  pages[1].SetActive(false);
-            //  pages[2].SetActive(true);
-           
-        }
 
+            if ((currentPage + 1) < pages.Length)
+            {
+                pages[currentPage].SetActive(false);
+                pages[currentPage + 1].SetActive(true);
+
+                currentPage += 1;
+            }
+
+        }
     }
     void deselectedBook()
     {
 
         if (isBookOpen == true)
         {
+
             bookOpen();
+
         }
 
         else
         {
+
             bookClosed();
 
         }
-
 
     }
     void bookClosed()
     {
 
         mainBookUI.SetActive(false);
+        mainInstructionUI.SetActive(true);
         Time.timeScale = 1f;
         isBookOpen = false;
 
@@ -116,6 +142,7 @@ public class cube : MonoBehaviour
     {
 
         mainBookUI.SetActive(true);
+        mainInstructionUI.SetActive(false);
         Time.timeScale = 0f;
         isBookOpen = true;
 
@@ -123,8 +150,11 @@ public class cube : MonoBehaviour
 
     void Shrink()
     {
+
         transform.localScale /= 1.1f;
+    
     }
+
 
     void gamePaused()
     {
@@ -153,7 +183,6 @@ public class cube : MonoBehaviour
         else
         {
             Resume();
-
         }
 
 
@@ -162,6 +191,7 @@ public class cube : MonoBehaviour
     {
 
         pauseMenuUI.SetActive(false);
+        mainInstructionUI.SetActive(true);
         Time.timeScale = 1f;
         isGamePaused = false;
 
@@ -171,10 +201,12 @@ public class cube : MonoBehaviour
     {
 
         pauseMenuUI.SetActive(true);
+        mainInstructionUI.SetActive(false);
         Time.timeScale = 0f;
         isGamePaused = true;
 
     }
+
 
     void Update()
     {
@@ -186,11 +218,46 @@ public class cube : MonoBehaviour
         transform.Rotate(r, Space.Self);
         //  Vector3 l = new Vector3(rotate.y, lockPos, lockPos) * 100f * Time.deltaTime;
         //  transform.Rotate(l, Space.Self);
-        i = pages.Length;
+
+        for (int i = 0; i < pages.Length; i++)
+        {
+            i++;
+        }
 
     }
 
-  
+    void OnTriggerEnter(Collider collider)
+    {
+
+        if (collider.gameObject.tag == "Meat")
+        {
+            Debug.Log("This is meat");
+            collisionDetected = true;
+        }
+
+        if (collider.gameObject.tag == "Vegetables")
+        {
+            Debug.Log("Those are vegetables");
+            collisionDetected = true;
+
+        }
+
+        if (collider.gameObject.tag == "Desserts")
+        {
+            Debug.Log("Those are items for desserts");
+            collisionDetected = true;
+
+        }
+
+        if (collider.gameObject.tag == "Drinks")
+        {
+            Debug.Log("Those are items for drinks");
+            collisionDetected = true;
+
+        }
+
+
+    }
 
     void OnEnable()
     {
@@ -201,6 +268,6 @@ public class cube : MonoBehaviour
     {
         controls.playerControls.Disable();
     }
-
+        
 }
 

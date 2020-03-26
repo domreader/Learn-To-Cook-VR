@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - book
+  - Meat
+  - Vegetables
+  - Desserts
+  - Drinks
   layers:
   - Default
   - TransparentFX
