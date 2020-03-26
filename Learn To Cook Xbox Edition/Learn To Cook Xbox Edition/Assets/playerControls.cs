@@ -19,7 +19,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""d1fa0f28-e8c3-4d4c-aa94-20618dbf0c87"",
             ""actions"": [
                 {
-                    ""name"": ""Grow"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""c1ff5197-f968-44de-ba30-682c395801e6"",
                     ""expectedControlType"": """",
@@ -57,6 +57,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpeningBook"",
+                    ""type"": ""Button"",
+                    ""id"": ""440c4de5-57af-45c2-92b7-c4990932599e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TurningPageLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""77ea589b-52cc-4e94-a36f-13b458abd7cf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TurningPageRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""00adf7a7-0997-4d9a-8ba9-3b9864d02869"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -67,7 +91,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Grow"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -147,6 +171,72 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a747b320-6f28-4dfc-9b2b-047f6fd4d0f2"",
+                    ""path"": ""<XInputController>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpeningBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e14a7ea0-8b2e-474b-86b5-c8079e4e605d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpeningBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af793f84-53c6-4658-8dad-ed05938c483e"",
+                    ""path"": ""<XInputController>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurningPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""851c9802-d843-4d48-b358-0fc3b1ef3760"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurningPageLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a45b1a9-0f2f-497c-8089-823d56e50a06"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurningPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""257e84e0-bffe-4766-baad-749f2e23ae4b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurningPageRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,11 +245,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
 }");
         // playerControls
         m_playerControls = asset.FindActionMap("playerControls", throwIfNotFound: true);
-        m_playerControls_Grow = m_playerControls.FindAction("Grow", throwIfNotFound: true);
+        m_playerControls_Interact = m_playerControls.FindAction("Interact", throwIfNotFound: true);
         m_playerControls_Shrink = m_playerControls.FindAction("Shrink", throwIfNotFound: true);
         m_playerControls_Move = m_playerControls.FindAction("Move", throwIfNotFound: true);
         m_playerControls_RotateLook = m_playerControls.FindAction("RotateLook", throwIfNotFound: true);
         m_playerControls_Pause = m_playerControls.FindAction("Pause", throwIfNotFound: true);
+        m_playerControls_OpeningBook = m_playerControls.FindAction("OpeningBook", throwIfNotFound: true);
+        m_playerControls_TurningPageLeft = m_playerControls.FindAction("TurningPageLeft", throwIfNotFound: true);
+        m_playerControls_TurningPageRight = m_playerControls.FindAction("TurningPageRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -209,20 +302,26 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // playerControls
     private readonly InputActionMap m_playerControls;
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
-    private readonly InputAction m_playerControls_Grow;
+    private readonly InputAction m_playerControls_Interact;
     private readonly InputAction m_playerControls_Shrink;
     private readonly InputAction m_playerControls_Move;
     private readonly InputAction m_playerControls_RotateLook;
     private readonly InputAction m_playerControls_Pause;
+    private readonly InputAction m_playerControls_OpeningBook;
+    private readonly InputAction m_playerControls_TurningPageLeft;
+    private readonly InputAction m_playerControls_TurningPageRight;
     public struct PlayerControlsActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Grow => m_Wrapper.m_playerControls_Grow;
+        public InputAction @Interact => m_Wrapper.m_playerControls_Interact;
         public InputAction @Shrink => m_Wrapper.m_playerControls_Shrink;
         public InputAction @Move => m_Wrapper.m_playerControls_Move;
         public InputAction @RotateLook => m_Wrapper.m_playerControls_RotateLook;
         public InputAction @Pause => m_Wrapper.m_playerControls_Pause;
+        public InputAction @OpeningBook => m_Wrapper.m_playerControls_OpeningBook;
+        public InputAction @TurningPageLeft => m_Wrapper.m_playerControls_TurningPageLeft;
+        public InputAction @TurningPageRight => m_Wrapper.m_playerControls_TurningPageRight;
         public InputActionMap Get() { return m_Wrapper.m_playerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,9 +331,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerControlsActionsCallbackInterface != null)
             {
-                @Grow.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
-                @Grow.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
-                @Grow.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
+                @Interact.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
                 @Shrink.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShrink;
                 @Shrink.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShrink;
                 @Shrink.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShrink;
@@ -247,13 +346,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPause;
+                @OpeningBook.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnOpeningBook;
+                @OpeningBook.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnOpeningBook;
+                @OpeningBook.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnOpeningBook;
+                @TurningPageLeft.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageLeft;
+                @TurningPageLeft.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageLeft;
+                @TurningPageLeft.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageLeft;
+                @TurningPageRight.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageRight;
+                @TurningPageRight.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageRight;
+                @TurningPageRight.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnTurningPageRight;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Grow.started += instance.OnGrow;
-                @Grow.performed += instance.OnGrow;
-                @Grow.canceled += instance.OnGrow;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @Shrink.started += instance.OnShrink;
                 @Shrink.performed += instance.OnShrink;
                 @Shrink.canceled += instance.OnShrink;
@@ -266,16 +374,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @OpeningBook.started += instance.OnOpeningBook;
+                @OpeningBook.performed += instance.OnOpeningBook;
+                @OpeningBook.canceled += instance.OnOpeningBook;
+                @TurningPageLeft.started += instance.OnTurningPageLeft;
+                @TurningPageLeft.performed += instance.OnTurningPageLeft;
+                @TurningPageLeft.canceled += instance.OnTurningPageLeft;
+                @TurningPageRight.started += instance.OnTurningPageRight;
+                @TurningPageRight.performed += instance.OnTurningPageRight;
+                @TurningPageRight.canceled += instance.OnTurningPageRight;
             }
         }
     }
     public PlayerControlsActions @playerControls => new PlayerControlsActions(this);
     public interface IPlayerControlsActions
     {
-        void OnGrow(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnShrink(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnRotateLook(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnOpeningBook(InputAction.CallbackContext context);
+        void OnTurningPageLeft(InputAction.CallbackContext context);
+        void OnTurningPageRight(InputAction.CallbackContext context);
     }
 }

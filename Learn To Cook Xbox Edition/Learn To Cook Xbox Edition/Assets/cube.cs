@@ -7,6 +7,7 @@ public class cube : MonoBehaviour
 {
 
     PlayerControls controls;
+    Collider collider;
 
     Vector3 move;
     Vector3 rotate;
@@ -14,19 +15,25 @@ public class cube : MonoBehaviour
     float speed = 2.0f;
 
     public static bool isGamePaused = false;
+    public static bool isBookOpen = false;
     public GameObject pauseMenuUI;
+    public GameObject mainBookUI;
+
+    public GameObject[] pages;
+    int i = 0;
+    
 
     void Awake()
     {
         controls = new PlayerControls();
 
-        controls.playerControls.Grow.performed += ctx => Grow();
+        controls.playerControls.OpeningBook.started += ctx => selectedBook();
+        controls.playerControls.OpeningBook.canceled += ctx => deselectedBook();
 
         controls.playerControls.Shrink.performed += ctx => Shrink();
 
         controls.playerControls.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.playerControls.Move.canceled += ctx => move = Vector2.zero;
-
 
         controls.playerControls.RotateLook.performed += ctx => rotate = ctx.ReadValue<Vector2>();
         controls.playerControls.RotateLook.canceled += ctx => rotate = Vector2.zero;
@@ -34,12 +41,84 @@ public class cube : MonoBehaviour
         controls.playerControls.Pause.started += ctx => gamePaused();
         controls.playerControls.Pause.canceled += ctx => gamePlaying();
 
+        controls.playerControls.TurningPageLeft.performed += ctx => turnPageLeft();
+        controls.playerControls.TurningPageRight.performed += ctx => turnPageRight();
+
+      
+    }
+
+
+    void selectedBook()
+    {
+
+        if (isBookOpen)
+        {
+            bookClosed();
+        }
+
+        else
+        {
+            bookOpen();
+        }
+
 
     }
 
-    void Grow()
+    void turnPageLeft()
     {
-        transform.localScale *= 1.1f;
+        if (isBookOpen == true)
+        {
+
+            pages[0].SetActive(true);
+            pages[1].SetActive(false);
+        }
+        
+    }
+    void turnPageRight()
+    {
+
+        if(isBookOpen == true)
+        {
+            pages[0].SetActive(false);
+            pages[1].SetActive(true);
+          //  pages[1].SetActive(false);
+            //  pages[2].SetActive(true);
+           
+        }
+
+    }
+    void deselectedBook()
+    {
+
+        if (isBookOpen == true)
+        {
+            bookOpen();
+        }
+
+        else
+        {
+            bookClosed();
+
+        }
+
+
+    }
+    void bookClosed()
+    {
+
+        mainBookUI.SetActive(false);
+        Time.timeScale = 1f;
+        isBookOpen = false;
+
+    }
+
+    void bookOpen()
+    {
+
+        mainBookUI.SetActive(true);
+        Time.timeScale = 0f;
+        isBookOpen = true;
+
     }
 
     void Shrink()
@@ -105,9 +184,9 @@ public class cube : MonoBehaviour
 
         Vector3 r = new Vector3(lockPos, rotate.x , lockPos) * 100f * Time.deltaTime;
         transform.Rotate(r, Space.Self);
-      //  Vector3 l = new Vector3(rotate.y, lockPos, lockPos) * 100f * Time.deltaTime;
-      //  transform.Rotate(l, Space.Self);
-
+        //  Vector3 l = new Vector3(rotate.y, lockPos, lockPos) * 100f * Time.deltaTime;
+        //  transform.Rotate(l, Space.Self);
+        i = pages.Length;
 
     }
 

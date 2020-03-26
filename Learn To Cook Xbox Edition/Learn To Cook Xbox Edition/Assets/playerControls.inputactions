@@ -6,7 +6,7 @@
             "id": "d1fa0f28-e8c3-4d4c-aa94-20618dbf0c87",
             "actions": [
                 {
-                    "name": "Grow",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "c1ff5197-f968-44de-ba30-682c395801e6",
                     "expectedControlType": "",
@@ -44,6 +44,30 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "OpeningBook",
+                    "type": "Button",
+                    "id": "440c4de5-57af-45c2-92b7-c4990932599e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TurningPageLeft",
+                    "type": "Button",
+                    "id": "77ea589b-52cc-4e94-a36f-13b458abd7cf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TurningPageRight",
+                    "type": "Button",
+                    "id": "00adf7a7-0997-4d9a-8ba9-3b9864d02869",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -54,7 +78,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grow",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -132,6 +156,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a747b320-6f28-4dfc-9b2b-047f6fd4d0f2",
+                    "path": "<XInputController>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpeningBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e14a7ea0-8b2e-474b-86b5-c8079e4e605d",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpeningBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af793f84-53c6-4658-8dad-ed05938c483e",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurningPageLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "851c9802-d843-4d48-b358-0fc3b1ef3760",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurningPageLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a45b1a9-0f2f-497c-8089-823d56e50a06",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurningPageRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "257e84e0-bffe-4766-baad-749f2e23ae4b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurningPageRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
