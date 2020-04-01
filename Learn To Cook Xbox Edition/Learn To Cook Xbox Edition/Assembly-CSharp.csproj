@@ -63,9 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\cube.cs" />
-    <Compile Include="Assets\pauseMenu.cs" />
-    <Compile Include="Assets\playerControls.cs" />
+    <Compile Include="Assets\Scripts\UserInterface.cs" />
+    <Compile Include="Assets\Scripts\cube.cs" />
+    <Compile Include="Assets\Scripts\itemPlacement.cs" />
+    <Compile Include="Assets\Scripts\playerControls.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/domre/Documents/GitHub/Learn-To-Cook-VR/Learn To Cook Xbox Edition/Learn To Cook Xbox Edition/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
