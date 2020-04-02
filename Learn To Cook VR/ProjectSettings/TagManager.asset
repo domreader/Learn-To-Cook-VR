@@ -14,6 +14,36 @@ TagManager:
   - Hob
   - Milk
   - Stock
+  - AppleCider
+  - BasmatiRice
+  - BeefBurgers
+  - BeefGravy
+  - CannedHam
+  - CannedTuna
+  - CatFood
+  - Cheddar
+  - ChickenStock
+  - ChocoSpread
+  - CocoaPowder
+  - Detergent
+  - DogFood
+  - DoubleCream
+  - EggWhites
+  - Frankfurters
+  - GoldenSyrup
+  - InstantCoffee
+  - LooseLeafTea
+  - MapleSyrup
+  - OliveOil
+  - Quark
+  - RicePuffs
+  - Sardines
+  - SunflowerOil
+  - TableSalt
+  - TomatoSauce
+  - UnicornFluff
+  - VegStock
+  - WhiteWine
   layers:
   - Default
   - TransparentFX

@@ -96,8 +96,8 @@ public class MakingRoux : MonoBehaviour
 
         if (isEverythingCorrect == true && collider.gameObject.tag == "placeMat")
         {
-        
-            SceneManager.LoadScene("Menu Screen");
+         
+            SceneManager.LoadScene("Burgers & Dogs");
 
         }
 
