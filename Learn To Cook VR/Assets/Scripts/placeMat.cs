@@ -19,72 +19,51 @@ public class placeMat : MonoBehaviour
 
 {
     public Material[] itemMaterials;
-    public GameObject[] items;
-    public GameObject colouredEdge;
     public static bool itemOnMat = false;
     public static bool recipeCorrect = false;
     string itemTag;
     string numberMat;
-    public GameObject[] mats;
-    public GameObject CE1;
-    public GameObject CE2;
-    public GameObject CE3;
+    public GameObject mat1;
+    public GameObject mat2;
+    public GameObject mat3;
+
+    public GameObject colouredEdge1;
+    public GameObject colouredEdge2;
+    public GameObject colouredEdge3;
+    public GameObject buttonEdge;
+
+
+    GameObject item1;
 
     List<string> currentItems;
     GameObject itemList;
+    GameObject recipeList;
+    List<GameObject> storedContacts;
 
     private void Start()
     {
         currentItems = new List<string>();
         itemList = GameObject.Find("PlaceMatSystem");
+        recipeList = GameObject.Find("PlaceMatSystem");
         
+        colouredEdge1 = GameObject.Find("PlaceMatSytem");
+        colouredEdge2 = GameObject.Find("PlaceMatSytem");
+        colouredEdge3 = GameObject.Find("PlaceMatSytem");
+        buttonEdge = GameObject.Find("PlaceMatSytem");
 
     }
     private void OnTriggerEnter(Collider collider)
     {
-       
+
 
         if (collider == true)
         {
 
-            numberMat = gameObject.name;
-            itemTag = collider.gameObject.tag;
-
-
-            Debug.Log("Item " + itemTag + " is on " + numberMat);
-
-
             itemOnMat = true;
-            colouredEdge.GetComponent<Renderer>().material = itemMaterials[1];
+            colouredEdge1.GetComponent<Renderer>().material = itemMaterials[1];
+            colouredEdge2.GetComponent<Renderer>().material = itemMaterials[1];
+            colouredEdge3.GetComponent<Renderer>().material = itemMaterials[1];
 
-            if (itemTag != null)
-            {
-                currentItems.Add(itemTag);
-                itemList.GetComponent<itemList>().currentItems.Add(itemTag);
-
-            }
-
-            for (int i = 0; i < itemList.GetComponent<itemList>().currentItems.Count; i++)
-            {
-
-                if (itemList.GetComponent<itemList>().currentItems.Count < 3)
-                {
-                    Debug.Log("There are not three items");
-                }
-
-                if (itemList.GetComponent<itemList>().currentItems.Count == 3)
-                {
-                    Debug.Log("list contains " + itemList.GetComponent<itemList>().currentItems[i] + " and " + itemList.GetComponent<itemList>().currentItems[i + 1] + " as well as " + itemList.GetComponent<itemList>().currentItems[i + 2]);
-
-                }
-
-                if (itemList.GetComponent<itemList>().currentItems.Contains("Flour") && itemList.GetComponent<itemList>().currentItems.Contains("Butter"))
-                {
-                    Debug.Log("Roux");
-                }
-
-                submitButton();
-            }
         }
     }
 
@@ -94,22 +73,10 @@ public class placeMat : MonoBehaviour
         if (collider == true)
         {
 
-
-            if (itemTag != null)
-            {
-                currentItems.Remove(itemTag);
-                itemList.GetComponent<itemList>().currentItems.Remove(itemTag);
-
-                Debug.Log("Item " + itemTag + " removed from list.");
-            }
-
-            numberMat = gameObject.name;
-            itemTag = collider.gameObject.tag;
-
-            Debug.Log(itemTag + " removed from " + numberMat);
-
             itemOnMat = false ;
-            colouredEdge.GetComponent<Renderer>().material = itemMaterials[0];
+            colouredEdge1.GetComponent<Renderer>().material = itemMaterials[0];
+            colouredEdge2.GetComponent<Renderer>().material = itemMaterials[0];
+            colouredEdge3.GetComponent<Renderer>().material = itemMaterials[0];
 
         }
         
@@ -118,28 +85,9 @@ public class placeMat : MonoBehaviour
     void submitButton()
     {
 
+        recipeList.GetComponent<recipeList>().menu();
 
-        if (itemList.GetComponent<itemList>().currentItems.Contains("Flour") && itemList.GetComponent<itemList>().currentItems.Contains("Butter") && itemList.GetComponent<itemList>().currentItems.Contains("Milk"))
-        {
-            Debug.Log("Bechemel");
-            recipeCorrect = true;
-        }
 
-        if (itemList.GetComponent<itemList>().currentItems.Contains("Flour") && itemList.GetComponent<itemList>().currentItems.Contains("Butter") && itemList.GetComponent<itemList>().currentItems.Contains("ChickenStock") || itemList.GetComponent<itemList>().currentItems.Contains("VegStock"))
-        {
-            Debug.Log("Veloute");
-            recipeCorrect = true;
-        }
-
-        if (itemList.GetComponent<itemList>().currentItems.Contains("BasmatiRice") && itemList.GetComponent<itemList>().currentItems.Contains("Butter") && itemList.GetComponent<itemList>().currentItems.Contains("ChickenStock"))
-        {
-            Debug.Log("Risotto");
-            recipeCorrect = true;
-            CE1.GetComponent<Renderer>().material = itemMaterials[2];
-            CE2.GetComponent<Renderer>().material = itemMaterials[2];
-            CE3.GetComponent<Renderer>().material = itemMaterials[2];
-
-        }
     }
 
 }
