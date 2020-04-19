@@ -117,9 +117,9 @@ public class recipeList : MonoBehaviour
 
         }
 
-        if (itemList.GetComponent<itemList>().currentItems.Contains("Chicken Wings") && itemList.GetComponent<itemList>().currentItems.Contains("Gochujang") && itemList.GetComponent<itemList>().currentItems.Contains("Spring Onions"))
+        if (itemList.GetComponent<itemList>().currentItems.Contains("Chicken") && itemList.GetComponent<itemList>().currentItems.Contains("Gochujang") && itemList.GetComponent<itemList>().currentItems.Contains("Spring Onions"))
         {
-            Debug.Log("Korean Style Wings");
+            Debug.Log("Korean Style Chicken");
             recipeCorrect = true;
             audioSource.Play();
 
@@ -278,7 +278,8 @@ public class recipeList : MonoBehaviour
             Destroy(item2);
             Destroy(item3);
 
-            itemList.GetComponent<itemList>().storedContacts.Clear(); // THe stored contacts list is cleared to allow for repopulation of fields
+            itemList.GetComponent<itemList>().storedContacts.Clear(); // The stored contacts list is cleared to allow for repopulation of fields
+            itemList.GetComponent<itemList>().currentItems.Clear(); // The current items list is cleared to allow for repopulation of fields
 
             buttonEdge.GetComponent<Renderer>().material = itemMaterials[0]; //Button edge set back to placeholder colour
             
@@ -287,6 +288,10 @@ public class recipeList : MonoBehaviour
             timer = 0; 
         }
 
+        if(recipeCorrect == false) // Making sure that the colour of the button on recipe correct being false stays as the placeholder colour (Clear White)
+        {
+            buttonEdge.GetComponent<Renderer>().material = itemMaterials[0];
+        }
 
      }
 

@@ -85,7 +85,7 @@ public class placeMat : MonoBehaviour
 
     void submitButton()
     {
-
+        
         recipeList.GetComponent<recipeList>().menu();
 
 
