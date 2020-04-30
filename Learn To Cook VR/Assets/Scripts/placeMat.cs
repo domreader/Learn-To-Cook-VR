@@ -2,20 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class placeMat : MonoBehaviour 
     
-// This is the way that when two correct items are submitted they are checked then the result is printed
-//if (itemList.GetComponent<itemList>().currentItems.Contains("Item1") && itemList.GetComponent<itemList>().currentItems.Contains("Item2"))
-//{
-//    Debug.Log("Result of 2 Items");
-//}
-
-// This is the way that when three correct items are submitted they are checked then the result is printed
-//if (itemList.GetComponent<itemList>().currentItems.Contains("Item1") && itemList.GetComponent<itemList>().currentItems.Contains("Item2") && itemList.GetComponent<itemList>().currentItems.Contains("Item3"))
-//{
-//    Debug.Log("Result of 3 Items");
-//}
+// The placeMat script is in place so that when a collision is detected on a mat (3 of them) the item is added to a list that is accessed in the recipe script to see if links to a correct recipe.
+// On the submit button being pressed it calls the method Menu from the recipeList script containing those recipes.
 
 {
     public Material[] itemMaterials;
@@ -32,6 +23,9 @@ public class placeMat : MonoBehaviour
     public GameObject colouredEdge3;
     public GameObject buttonEdge;
 
+    public float timer;
+
+    bool timerStarted = false;
 
     GameObject item1;
 
@@ -53,7 +47,7 @@ public class placeMat : MonoBehaviour
         buttonEdge = GameObject.Find("PlaceMatSytem");
 
     }
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider) // If the item collides with the mat the edges are set to pink (item present)
     {
 
 
@@ -65,11 +59,12 @@ public class placeMat : MonoBehaviour
             colouredEdge2.GetComponent<Renderer>().material = itemMaterials[1];
             colouredEdge3.GetComponent<Renderer>().material = itemMaterials[1];
 
+
         }
     }
 
-    private void OnTriggerExit(Collider collider)
-      {
+    private void OnTriggerExit(Collider collider) // If the item is lifted off the mat the edges are set to white (item not present)
+    {
 
         if (collider == true)
         {
@@ -83,12 +78,14 @@ public class placeMat : MonoBehaviour
         
     }
 
-    void submitButton()
+    void submitButton() // Calling function from recipeList
     {
         
         recipeList.GetComponent<recipeList>().menu();
 
 
     }
+
+   
 
 }

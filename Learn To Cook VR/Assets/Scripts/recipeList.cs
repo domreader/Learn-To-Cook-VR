@@ -7,7 +7,7 @@ public class recipeList : MonoBehaviour
 {
     //Initialising Variables
 
-    public bool recipeCorrect = false;
+    public bool recipeCorrect;
     public bool recipeIncorrect = false;
     GameObject itemList;
     public GameObject buttonEdge;
@@ -19,15 +19,20 @@ public class recipeList : MonoBehaviour
     GameObject colouredEdge;
     Sprite sprites;
     GameObject Recipe1;
+    Light lights;
     public GameObject posterChange;
     public AudioSource audioSource;
-
+    public int numberCompleted = 0;
+    public int score = 0;
     void Start()
     {
 
         itemList = GameObject.Find("PlaceMatSystem");
         sprites = GetComponent<posterChanges>().sprites[0];
-
+        numberCompleted = 0;
+        score = 0;
+        lights = GetComponent<Spotlights>().lights[0];
+        recipeCorrect = false;
     }
 
     // Menu contains all of the recipes that can be completed in the game. Each checks the itemList Script and looks at current items. Depending on the names matching up it then knows the right recipe has been achieved. 
@@ -49,6 +54,10 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().nextOne();
 
+            lights.GetComponent<Spotlights>().lightNumber = 0;
+
+            lights.GetComponent<Spotlights>().lightsOn();
+            
         }
 
 
@@ -65,7 +74,11 @@ public class recipeList : MonoBehaviour
             posterChange.GetComponent<posterChanges>().posterNumber = 1;
 
             posterChange.GetComponent<posterChanges>().nextOne();
-            
+
+            lights.GetComponent<Spotlights>().lightNumber = 1;
+
+            lights.GetComponent<Spotlights>().lightsOn();
+
         }
 
 
@@ -83,6 +96,9 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().nextOne();
 
+            lights.GetComponent<Spotlights>().lightNumber = 2;
+
+            lights.GetComponent<Spotlights>().lightsOn();
         }
 
         if (itemList.GetComponent<itemList>().currentItems.Contains("Flour") && itemList.GetComponent<itemList>().currentItems.Contains("Yoghurt") && itemList.GetComponent<itemList>().currentItems.Contains("Mixed Herbs"))
@@ -257,6 +273,18 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().nextOne();
         }
+
+
+        if (recipeCorrect == true)
+        {
+            numberCompleted++;
+            Debug.Log(numberCompleted);
+
+            score++;
+            Debug.Log(score);
+            
+        }
+
     }
     
      void Update()
@@ -268,10 +296,13 @@ public class recipeList : MonoBehaviour
             timer += Time.deltaTime;
             Debug.Log(timer);
             buttonEdge.GetComponent<Renderer>().material = itemMaterials[2]; //Changing colour of button edge to green
+         
+
+
 
         }
 
-        if (timer > 2) //Upon the timer being greater than 5 the items are destroyed
+        if (timer > 2) //Upon the timer being greater than 2 the items are destroyed
         {
 
             Destroy(item1);

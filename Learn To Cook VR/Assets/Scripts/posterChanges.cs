@@ -16,7 +16,6 @@ public class posterChanges : MonoBehaviour
     {
 
 
-        Recipe1 = GetComponent<GameObject>();
 
 
     }
@@ -25,10 +24,6 @@ public class posterChanges : MonoBehaviour
     {
 
         posters[posterNumber].GetComponent<SpriteRenderer>().sprite = sprites[posterNumber];
-
-       // currentSpriteNum = sprites.Length;
-
-      // GameObject.Find("Bechemel_Sauce_Hints").GetComponent<SpriteRenderer>().sprite = sprites[currentSpriteNum - 1];
 
         Debug.Log("Image Changed");
 

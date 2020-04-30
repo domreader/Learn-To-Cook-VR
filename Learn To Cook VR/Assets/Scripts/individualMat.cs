@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class individualMat : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class individualMat : MonoBehaviour
     public Material[] itemMaterials;
 
     public List<GameObject> storedContacts;
+    public TextMesh text;
+    public TextMesh scoreText;
+    bool timerStart = false;
+    bool recipeCorrect;
+    int numberCompleted;
+    int score;
+
+    float timer;
 
    void Start()
     {
@@ -24,6 +33,10 @@ public class individualMat : MonoBehaviour
         recipeList = GameObject.Find("PlaceMatSystem");
 
         itemMaterials = recipeList.GetComponent<recipeList>().itemMaterials;
+        numberCompleted = recipeList.GetComponent<recipeList>().numberCompleted;
+        recipeCorrect = recipeList.GetComponent<recipeList>().recipeCorrect;
+        score = recipeList.GetComponent<recipeList>().score;
+
 
     }
     void OnTriggerEnter(Collider other)
@@ -33,6 +46,7 @@ public class individualMat : MonoBehaviour
         itemCollided = other.gameObject;
         itemCollidedName = other.gameObject.name;
 
+        timerStart = true;
 
         if (itemCollidedName != null)
         {
@@ -75,8 +89,62 @@ public class individualMat : MonoBehaviour
             colouredEdge.GetComponent<Renderer>().material = itemMaterials[0];
 
 
+           
+
         }
+
+        if (timerStart == true)
+        {
+            timer += (Time.deltaTime);
+            text.text = timer.ToString("F2");
+
+            Debug.Log(timer);
+           
+            if (numberCompleted >= 3)
+            {
+                timer = 20;
+            }
+
+
+            if (numberCompleted >= 6)
+            {
+                timer = 40;
+            }
+
+
+            if (numberCompleted > 9)
+            {
+                timer = 60;
+            }
+
+
+            if (numberCompleted > 12)
+            {
+                timer = 80;
+            }
+        }
+
+        if (recipeList.GetComponent<recipeList>().recipeCorrect == true)
+        {
+            timerStart = false;
+
+            timer = 0;
+            text.text = timer.ToString("F2");
+
+            scoreText.text = score.ToString("F2");
+
+        }
+
+        if (timer >= 100)
+        {
+            Debug.Log("Too Long");
+            timer = 0;
+
+            timerStart = false;
+        }
+
+
+        
+
     }
-
-
 }
