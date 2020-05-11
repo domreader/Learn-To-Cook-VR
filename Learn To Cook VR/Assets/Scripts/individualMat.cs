@@ -17,134 +17,159 @@ public class individualMat : MonoBehaviour
 
     public List<GameObject> storedContacts;
     public TextMesh text;
-    public TextMesh scoreText;
     bool timerStart = false;
     bool recipeCorrect;
     int numberCompleted;
+    bool numberComplete = false;
     int score;
+    Text scoreText;
 
-    float timer;
+    float timer = 100;
 
    void Start()
     {
+
         storedContacts = new List<GameObject>();
         currentItems = new List<string>();
         itemList = GameObject.Find("PlaceMatSystem");
         recipeList = GameObject.Find("PlaceMatSystem");
 
         itemMaterials = recipeList.GetComponent<recipeList>().itemMaterials;
-        numberCompleted = recipeList.GetComponent<recipeList>().numberCompleted;
         recipeCorrect = recipeList.GetComponent<recipeList>().recipeCorrect;
         score = recipeList.GetComponent<recipeList>().score;
 
-
     }
-    void OnTriggerEnter(Collider other)
+
+    
+    void OnTriggerEnter(Collider other) // If the item collides with the mat the edges are set to pink(item present)
     {
         Debug.Log("There Is Collision");
 
-        itemCollided = other.gameObject;
-        itemCollidedName = other.gameObject.name;
+        itemCollided = other.gameObject; // Getting the collided gameobject
+        itemCollidedName = other.gameObject.name; // Getting the name of the collided object
 
-        timerStart = true;
+        timerStart = true; // Starting the game timer based on the first collision
 
-        if (itemCollidedName != null)
+        if (itemCollidedName != null) 
         {
 
-            currentItems.Add(itemCollidedName);
-            storedContacts.Add(itemCollided);
+            itemList.GetComponent<itemList>().currentItems.Add(itemCollidedName); // Adding the name to a list
+            itemList.GetComponent<itemList>().storedContacts.Add(itemCollided); // Adding the gameobject to a list
 
-            itemList.GetComponent<itemList>().currentItems.Add(itemCollidedName);
-            itemList.GetComponent<itemList>().storedContacts.Add(itemCollided);
+            colouredEdge.GetComponent<Renderer>().material = itemMaterials[1]; // Setting the edge colour to pink
 
-            colouredEdge.GetComponent<Renderer>().material = itemMaterials[1];
-
-            Debug.Log("Item " + itemCollided + " has been added.");
-            Debug.Log("Item " + itemCollidedName + " has been added.");
+            Debug.Log("Item " + itemCollided + " has been added."); // Debug for testing
+            Debug.Log("Item " + itemCollidedName + " has been added."); // Debug for testing
 
         }
 
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)  // If the item is lifted off the mat the edges are set to white (item not present)
     {
         Debug.Log("There The Collision Goes");
         if (itemCollided != null)
         {
-            currentItems.Remove(itemCollidedName);
-            itemList.GetComponent<itemList>().currentItems.Remove(itemCollidedName);
-            itemList.GetComponent<itemList>().storedContacts.Remove(itemCollided);
 
-            colouredEdge.GetComponent<Renderer>().material = itemMaterials[0];
+            itemList.GetComponent<itemList>().currentItems.Remove(itemCollidedName); // Remove the name from the list
+            itemList.GetComponent<itemList>().storedContacts.Remove(itemCollided); // Remove the gameobject from the list
 
-            Debug.Log("Item " + itemCollided + " has been removed.");
+            colouredEdge.GetComponent<Renderer>().material = itemMaterials[0]; // Setting the edge colour to white 
+
+            Debug.Log("Item " + itemCollided + " has been removed."); // Debug for testing
         }
 
     }
 
+    private void numberCompletedAmount() // In the game completing recipes adds to a value called number complete, at different intervals the amount of time the user has is reduced.
+                                         // This is shown below
+    {
+
+        if (numberComplete == true) 
+        {
+
+            numberCompleted++;
+
+            numberComplete = false;
+        }
+
+        if (numberCompleted >= 3)
+        {
+            timer = 80;
+            text.text = timer.ToString();
+        }
+
+
+        if (numberCompleted >= 6)
+        {
+            timer = 60; 
+            text.text = timer.ToString();
+
+        }
+
+
+        if (numberCompleted >= 9)
+        {
+            timer = 40; 
+            text.text = timer.ToString();
+
+        }
+
+
+        if (numberCompleted >= 12)
+        {
+            timer = 20; 
+            text.text = timer.ToString();
+
+        }
+    }
+
+
     private void Update()
     {
-        if (itemList.GetComponent<itemList>().storedContacts.Count == 0)
+        if (itemList.GetComponent<itemList>().storedContacts.Count == 0) // If there are no gameobjects in the list making sure that the coloured edge is set to white
         {
+
             colouredEdge.GetComponent<Renderer>().material = itemMaterials[0];
 
-
-           
-
         }
 
-        if (timerStart == true)
+        if (timerStart == true) // When the timer start bool is set to true the timer starts and the 3d text object is updated
         {
-            timer += (Time.deltaTime);
+
+            timer -= (Time.deltaTime);
             text.text = timer.ToString("F2");
 
-            Debug.Log(timer);
-           
-            if (numberCompleted >= 3)
-            {
-                timer = 20;
-            }
-
-
-            if (numberCompleted >= 6)
-            {
-                timer = 40;
-            }
-
-
-            if (numberCompleted > 9)
-            {
-                timer = 60;
-            }
-
-
-            if (numberCompleted > 12)
-            {
-                timer = 80;
-            }
+            numberComplete = true; // Setting number complete to true
+        
         }
 
-        if (recipeList.GetComponent<recipeList>().recipeCorrect == true)
+        if (recipeList.GetComponent<recipeList>().recipeCorrect == true) // If recipe correct is true stopping the timer and setting back to full time
         {
             timerStart = false;
+            timer = 100;
 
-            timer = 0;
-            text.text = timer.ToString("F2");
+            numberCompletedAmount(); // Calling number completed method
 
-            scoreText.text = score.ToString("F2");
-
+         //   Debug.Log(numberCompleted); //Used For Testing
+         
+            
         }
 
-        if (timer >= 100)
+        if (timer < 0) // If timer gets to 0 score has a point taken away 
         {
+
             Debug.Log("Too Long");
-            timer = 0;
+            timer = 100;
+
+            score -= 1;
 
             timerStart = false;
+        
         }
-
 
         
+     
 
     }
 }

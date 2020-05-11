@@ -8,23 +8,22 @@ public class Spotlights : MonoBehaviour
     public Light[] lights;
     public int lightNumber;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   public void lightsOn()
+   public void lightsOn() // Enabling the Light component
     {
     
-        lights[lightNumber].GetComponent<Light>().enabled = lights[lightNumber];
+        lights[lightNumber].GetComponent<Light>().enabled = true;
 
     }
 
+    public void turnLightsOff() // Disabling the Light component
+    {
+
+        for (int i = 0; i < lights.Length; i++)
+        {
+
+            lights[i].GetComponent<Light>().enabled = false;
+
+        }
+
+    }
 }
