@@ -20,7 +20,7 @@ public class posterChanges : MonoBehaviour
 
     }
 
-    public void nextOne()
+    public void nextPoster()
     {
 
         posters[posterNumber].GetComponent<SpriteRenderer>().sprite = sprites[posterNumber];

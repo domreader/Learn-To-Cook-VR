@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class recipeList : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 0; // Setting the poster number to call the correct one
 
-            posterChange.GetComponent<posterChanges>().nextOne(); // Running method to change poster
+            posterChange.GetComponent<posterChanges>().nextPoster(); // Running method to change poster
 
             lights.GetComponent<Spotlights>().lightNumber = 0; // Setting light number to call the correct one
 
@@ -68,23 +69,23 @@ public class recipeList : MonoBehaviour
 
         if (itemList.GetComponent<itemList>().currentItems.Contains("Flour") && itemList.GetComponent<itemList>().currentItems.Contains("Butter") && itemList.GetComponent<itemList>().currentItems.Contains("Vegetable Stock"))
         {
-            Debug.Log("Veloute"); // Debug to tell what recipe has been made
-            recipeCorrect = true; // Marking recipe correct to true to allow a method later to work
-            audioSource.Play(); // Correct noise is played
+            Debug.Log("Veloute"); 
+            recipeCorrect = true; 
+            audioSource.Play(); 
 
-            item1 = itemList.GetComponent<itemList>().storedContacts[0]; // Setting item to the equal one in the list
+            item1 = itemList.GetComponent<itemList>().storedContacts[0]; 
             item2 = itemList.GetComponent<itemList>().storedContacts[0 + 1];
             item3 = itemList.GetComponent<itemList>().storedContacts[0 + 2];
 
-            posterChange.GetComponent<posterChanges>().posterNumber = 1; // Setting the hint poster to the full recipe 
+            posterChange.GetComponent<posterChanges>().posterNumber = 1;  
 
-            posterChange.GetComponent<posterChanges>().nextOne(); // Running the nextOne method from the poster change script
+            posterChange.GetComponent<posterChanges>().nextPoster(); 
 
-            lights.GetComponent<Spotlights>().lightNumber = 1; // Selecting the correct light to enable / disable
+            lights.GetComponent<Spotlights>().lightNumber = 1; 
 
-            lights.GetComponent<Spotlights>().lightsOn(); // Turning the light on
+            lights.GetComponent<Spotlights>().lightsOn(); 
 
-            gameLights.enabled = false; // Setting the main light to false to make sure the poster light is clear
+            gameLights.enabled = false;
         }
 
         if (itemList.GetComponent<itemList>().currentItems.Contains("Rice") && itemList.GetComponent<itemList>().currentItems.Contains("Butter") && itemList.GetComponent<itemList>().currentItems.Contains("Chicken Stock"))
@@ -99,7 +100,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 2;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
 
             lights.GetComponent<Spotlights>().lightNumber = 2;
 
@@ -120,7 +121,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 3;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
             lights.GetComponent<Spotlights>().lightNumber = 3;
 
             lights.GetComponent<Spotlights>().lightsOn();
@@ -140,7 +141,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 4;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
             lights.GetComponent<Spotlights>().lightNumber = 4;
 
             lights.GetComponent<Spotlights>().lightsOn();
@@ -160,7 +161,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 5;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
             lights.GetComponent<Spotlights>().lightNumber = 5;
 
             lights.GetComponent<Spotlights>().lightsOn();
@@ -180,7 +181,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 6;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
             lights.GetComponent<Spotlights>().lightNumber = 6;
 
             lights.GetComponent<Spotlights>().lightsOn();
@@ -200,7 +201,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 7;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
             lights.GetComponent<Spotlights>().lightNumber = 7;
 
             lights.GetComponent<Spotlights>().lightsOn();
@@ -220,7 +221,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 8;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
 
             lights.GetComponent<Spotlights>().lightNumber = 8;
 
@@ -241,7 +242,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 9;
 
-            posterChange.GetComponent<posterChanges>().nextOne();
+            posterChange.GetComponent<posterChanges>().nextPoster();
 
             lights.GetComponent<Spotlights>().lightNumber = 9;
 
@@ -262,7 +263,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 10;
 
-            posterChange.GetComponent<posterChanges>().nextOne(); 
+            posterChange.GetComponent<posterChanges>().nextPoster(); 
             
             lights.GetComponent<Spotlights>().lightNumber = 10;
 
@@ -283,7 +284,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 11;
 
-            posterChange.GetComponent<posterChanges>().nextOne(); 
+            posterChange.GetComponent<posterChanges>().nextPoster(); 
             
             lights.GetComponent<Spotlights>().lightNumber = 11;
 
@@ -304,7 +305,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 12;
 
-            posterChange.GetComponent<posterChanges>().nextOne(); lights.GetComponent<Spotlights>().lightNumber = 12;
+            posterChange.GetComponent<posterChanges>().nextPoster(); lights.GetComponent<Spotlights>().lightNumber = 12;
 
             lights.GetComponent<Spotlights>().lightsOn();
 
@@ -323,7 +324,7 @@ public class recipeList : MonoBehaviour
 
             posterChange.GetComponent<posterChanges>().posterNumber = 13;
 
-            posterChange.GetComponent<posterChanges>().nextOne(); 
+            posterChange.GetComponent<posterChanges>().nextPoster(); 
             
             lights.GetComponent<Spotlights>().lightNumber = 13;
 
@@ -371,14 +372,11 @@ public class recipeList : MonoBehaviour
 
         }
 
-       
-
         if (recipeCorrect == false) // Making sure that the colour of the button on recipe correct being false stays as the placeholder colour (Clear White)
         {
             buttonEdge.GetComponent<Renderer>().material = itemMaterials[0];
         }
 
      }
-
 
 }

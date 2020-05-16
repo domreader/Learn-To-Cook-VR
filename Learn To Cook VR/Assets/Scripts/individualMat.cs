@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 public class individualMat : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -23,6 +24,9 @@ public class individualMat : MonoBehaviour
     bool numberComplete = false;
     int score;
     Text scoreText;
+
+    string fullComplete;
+    int fullCompleteNum;
 
     float timer = 100;
 
@@ -122,6 +126,18 @@ public class individualMat : MonoBehaviour
             text.text = timer.ToString();
 
         }
+
+        if (numberCompleted == 14)
+        {
+
+            SceneManager.LoadScene("Menu Screen ");
+
+            Analytics.CustomEvent(fullComplete);
+
+            Analytics.SendEvent(fullComplete, fullCompleteNum, fullCompleteNum = 14);
+
+        }
+
     }
 
 
@@ -165,6 +181,8 @@ public class individualMat : MonoBehaviour
             score -= 1;
 
             timerStart = false;
+
+            SceneManager.LoadScene("Menu Screen");
         
         }
 
